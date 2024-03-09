@@ -5,21 +5,15 @@ import loginService from './services/login'
 import quoteService from './services/general'
 import LoginForm from './components/LoginForm'
 
-// import Toggable from './components/Toggable'
-
-
 function App() {
   const [user, setUser] = useState(null)
   const [notification, setNotification] = useState(null)
-
-  // const quoteFormRef = useRef()
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
-      // quoteService.setToken(user.token)
     }
   }, [])
 
@@ -28,7 +22,6 @@ function App() {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
-      // quoteService.setToken(user.token)
     }
   }, [])
 
@@ -37,7 +30,7 @@ function App() {
       const user = await loginService.login({ username, password })
 
       window.localStorage.setItem(
-        'loggedQuotelistUser', JSON.stringify(user)
+        'loggedUser', JSON.stringify(user)
       )
 
       quoteService.setToken(user.token)
@@ -62,8 +55,6 @@ function App() {
 
   const loginForm = () => {
     return (
-      // <Toggable buttonLabel='log in'>
-      // </Toggable>
       <LoginForm loginUser={loginUser}/>
     )
   }
@@ -82,7 +73,9 @@ function App() {
     <div>
       <Header/>
       <Notification notification={notification}/>
+
       {user ? loggedUserUI() : loginForm()}
+      
     </div>
   )
 }
