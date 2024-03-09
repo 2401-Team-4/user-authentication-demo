@@ -81,7 +81,7 @@ function App() {
 }
 
 const Header = () => {
-  return <h2>Quotelist</h2>
+  return <h2>Simple User Authentication Demo App</h2>
 }
 
 const Notification = ({ notification }) => {
