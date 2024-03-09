@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 import loginService from './services/login'
-import quoteService from './services/general'
 import LoginForm from './components/LoginForm'
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
         'loggedUser', JSON.stringify(user)
       )
 
-      quoteService.setToken(user.token)
       setUser(user)
       return true
     } catch (exception) {
