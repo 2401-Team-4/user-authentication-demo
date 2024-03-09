@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/quotes'
+const baseUrl = 'http://localhost:3019/api/login'
 
 let token = null // private variable to this module
 
