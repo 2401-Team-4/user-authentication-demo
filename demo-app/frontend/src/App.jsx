@@ -73,7 +73,7 @@ function App() {
       <>
         <h4>Hello {user.name}</h4>
         <button onClick={handleLogout}>logout</button>
-        <p>You are in!</p>
+        <p>👥You are in!✅👌</p>
       </>
     )
   }
