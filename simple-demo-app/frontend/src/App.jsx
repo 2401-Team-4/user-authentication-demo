@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import './App.css'
 
 import loginService from './services/login'
+
 import LoginForm from './components/LoginForm'
+import Notification from './components/Notification'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -69,25 +71,12 @@ function App() {
 
   return (
     <div>
-      <Header/>
+      <h2>Simple User Authentication Demo App</h2>
+
       <Notification notification={notification}/>
 
       {user ? loggedUserUI() : loginForm()}
 
-    </div>
-  )
-}
-
-const Header = () => {
-  return <h2>Simple User Authentication Demo App</h2>
-}
-
-const Notification = ({ notification }) => {
-  if (!notification) return
-
-  return (
-    <div className={`notification ${notification.type}`}>
-      {notification.message}
     </div>
   )
 }
