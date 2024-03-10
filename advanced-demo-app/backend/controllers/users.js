@@ -3,6 +3,7 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 
 const MIN_PASSWORD_LENGTH = 3
+const SALT_ROUNDS = 10
 
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({}).populate('quotes', {title: 1, author: 1, likes: 1})
@@ -24,8 +25,7 @@ usersRouter.post('/', async (request, response) => {
     return response.status(400).json({error: 'invalid password'})
   }
   
-  const saltRounds = 10
-  const passwordHash = await bcrypt.hash(password, saltRounds)
+  const passwordHash = await bcrypt.hash(password, SALT_ROUNDS)
 
   const user = new User({
     username,
