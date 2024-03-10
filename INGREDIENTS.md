@@ -1,4 +1,0 @@
-# 👥 User Authentication ✅👌: Ingredients
-
-[TOC]
-
