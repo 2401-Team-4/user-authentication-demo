@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import QuoteDetails from "./QuoteDetails"
 
-const Quote = ({ quote, likeQuote, deleteQuote, user }) => {
+const Quote = ({ quote, deleteQuote, user }) => {
   const [visible, setVisible] = useState(false)
 
   const quotestyle = {
@@ -16,12 +16,11 @@ const Quote = ({ quote, likeQuote, deleteQuote, user }) => {
 
   return (
     <div className='quote' style={quotestyle} id={quote.title}>
-      <h5 style={{ display: 'inline-block' }}>{`${quote.title}`} by {`${quote.author}`} </h5>
-      <button onClick={() => setVisible(!visible)}>{visible ? 'hide' : 'view'}</button>
+      <h5 style={{ display: 'inline-block' }}><span className="quote-title">{`${quote.title}`}</span> by {`${quote.author}`} </h5>
+      <button style={{ marginLeft: '20px' }} onClick={() => setVisible(!visible)}>{visible ? 'hide' : 'view'}</button>
       <QuoteDetails
         quote={quote}
         visible={visible}
-        // likeQuote={likeQuote}
         deleteQuote={deleteQuote}
         user={user}
       ></QuoteDetails>

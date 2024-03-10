@@ -40,3 +40,34 @@
 .read-the-docs {
   color: #888;
 }
+
+.add-quote {
+  margin-top: 20px;
+}
+
+.notification {
+  position: absolute;
+}
+
+.notification.fail {
+  top: 0;
+  left: 45vw;
+  background-color: rgb(179, 72, 90);
+  color: rgb(24, 21, 29);
+}
+
+.notification.success {
+  top: 0;
+  left: 30vw;
+  background-color: lightgreen;
+  color: rgb(31, 29, 39);
+}
+
+.add-quote {
+  margin-left: 20px;
+}
+
+.quote-title {
+  font-style: italic;
+  font-weight: lighter;
+}

@@ -1,6 +1,6 @@
 import Quote from "./Quote"
 
-const QuoteList = ({ quotes, likeQuote, deleteQuote, user }) => {
+const QuoteList = ({ quotes, deleteQuote, user }) => {
   if (!quotes) return
 
   return (
@@ -8,9 +8,8 @@ const QuoteList = ({ quotes, likeQuote, deleteQuote, user }) => {
       {quotes.map(quote => {
         return (
           <Quote
-            key={quote.id}
+            key={quote.id || quote._id}
             quote={quote}
-            // likeQuote={likeQuote}
             deleteQuote={deleteQuote}
             user={user}
           />

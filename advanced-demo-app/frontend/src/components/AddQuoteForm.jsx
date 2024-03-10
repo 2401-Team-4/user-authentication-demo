@@ -3,28 +3,27 @@ import { useState } from 'react'
 const AddQuoteForm = ({ addQuote }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
-  const [url, setURL] = useState('')
 
   const createQuote = async (e) => {
     e.preventDefault()
 
-    const newQuote = { title, author, url }
-
-    const success = await addQuote(newQuote)
-    if (success) {
-      setAuthor('')
-      setTitle('')
-      setURL('')
+    const newQuote = { title, author }
+    try {
+      const success = await addQuote(newQuote)
+      if (success) {
+        setAuthor('')
+        setTitle('')
+      }
+    } catch (e) {
+      console.log({error: e})
     }
   }
 
   return (
     <>
-      <h4>Create new</h4>
       <form onSubmit={createQuote}>
         <Input value={title} name='title' handler={setTitle}/>
         <Input value={author} name='author' handler={setAuthor}/>
-        <Input value={url} name='url' handler={setURL}/>
         <button className='add-quote' type="submit">Add new quote</button>
       </form>
     </>

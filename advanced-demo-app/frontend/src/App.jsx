@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 import loginService from './services/login'
@@ -7,13 +7,18 @@ import LoginForm from './components/LoginForm'
 
 import QuoteList from './components/QuoteList'
 import AddQuoteForm from './components/AddQuoteForm'
+import Notification from './components/Notification'
 
 function App() {
   const [quotes, setQuotes] = useState([])
   const [user, setUser] = useState(null)
   const [notification, setNotification] = useState(null)
 
-  // const quoteFormRef = useRef()
+  useEffect(() => {
+    quoteService.getAll().then(quotes => {
+      setQuotes(quotes)
+    })
+  }, [])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedQuotelistUser')
@@ -61,37 +66,9 @@ function App() {
     window.localStorage.clear()
   }
 
-  const loginForm = () => {
-    return (
-      // <Toggable buttonLabel='log in'>
-      // </Toggable>
-      <LoginForm loginUser={loginUser}/>
-    )
-  }
-
-  const loggedUserUI = () => {
-    return (
-      <>
-        <h4>Hello {user.name}</h4>
-        <button onClick={handleLogout}>logout</button>
-        {/* <Toggable buttonLabel='new quote' ref={quoteFormRef}>
-        </Toggable> */}
-        <AddQuoteForm addQuote={addQuote} />
-        <QuoteList
-          quotes={quotes}
-          // likeQuote={likeQuote}
-          deleteQuote={deleteQuote}
-          user={user}
-        />
-      </>
-    )
-  }
-
   const addQuote = async (newQuote) => {
     try {
       const addedQuote = await quoteService.createQuote(newQuote)
-      // quoteFormRef.current.toggleVisibility()
-      // const sorted = sortByLikes(quotes.concat(addedQuote))
       setQuotes(quotes.concat(addedQuote))
       displayNotification({
         type: 'success',
@@ -99,24 +76,17 @@ function App() {
       })
       return addedQuote
     } catch (e) {
+      displayNotification({ type: 'fail', message: 'Invalid quote' })
       throw Error(e)
     }
   }
-
-  // const likeQuote = async (quote) => {
-  //   try {
-  //     await quoteService.updateQuote(quote)
-  //   } catch (e) {
-  //     throw Error(e)
-  //   }
-  // }
 
   const deleteQuote = async (quote) => {
     try {
       await quoteService.deleteQuote(quote)
       const newQuotelist = filterDeleted(quote.id || quote._id)
-      // const sorted = sortByLikes(newQuotelist)
       setQuotes(newQuotelist)
+      displayNotification({ type: 'success', message: 'Quote deleted' })
     } catch (e) {
       throw Error(e)
     }
@@ -129,30 +99,32 @@ function App() {
     })
   }
 
-  // in decreasing order of likes
-  // const sortByLikes = (quotes) => {
-  //   return quotes.sort((a, b) => (b.likes - a.likes ))
-  // }
+  const loginForm = () => {
+    return (
+      <LoginForm loginUser={loginUser}/>
+    )
+  }
+
+  const loggedUserUI = () => {
+    return (
+      <>
+        <h4>Hello {user.name}</h4>
+        <button onClick={handleLogout}>logout</button>
+        <AddQuoteForm addQuote={addQuote} />
+        <QuoteList
+          quotes={quotes}
+          deleteQuote={deleteQuote}
+          user={user}
+        />
+      </>
+    )
+  }
 
   return (
     <div>
-      <Header/>
       <Notification notification={notification}/>
+      <h2>Quotelist</h2>
       {user ? loggedUserUI() : loginForm()}
-    </div>
-  )
-}
-
-const Header = () => {
-  return <h2>Quotelist</h2>
-}
-
-const Notification = ({ notification }) => {
-  if (!notification) return
-
-  return (
-    <div className={`notification ${notification.type}`}>
-      {notification.message}
     </div>
   )
 }
