@@ -5,7 +5,14 @@ const User = require('../models/user')
 const MIN_PASSWORD_LENGTH = 3
 
 usersRouter.get('/', async (request, response) => {
-  const users = await User.find({})
+  const users = await User.find({}).populate('quotes', {title: 1, author: 1, likes: 1})
+  // the argument given to the populate method defines that the ids referencing
+  // quote objects in the quotes field of the user document will be replaced
+  // by the referenced quote document (pseudo join queries)
+
+  // The functionality of the populate method of Mongoose is based on the 
+  // fact that we have defined "types" to the references in the Mongoose 
+  // schema with the ref option:
 
   response.json(users)
 })

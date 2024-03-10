@@ -11,8 +11,15 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  quotes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Quote'
+    }
+  ],
 })
 
+// Hides ids and password hash from public exposure
 userSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()

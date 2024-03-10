@@ -6,9 +6,11 @@ const cors = require('cors')
 
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
+const quotesRouter = require('./controllers/quotes')
 
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
+// logs requests in and out from the backend 
 const morgan = require('morgan')
 
 const mongoose = require('mongoose')
@@ -23,6 +25,7 @@ mongoose.connect(config.MONGODB_URI)
   logger.error('error connecting to MongoDB:', error.message)
 })
 
+// options for morgan => show body of requests as well
 morgan.token('body', req => {
   return JSON.stringify(req.body)
 })
@@ -33,6 +36,7 @@ app.use(cors())
 app.use(express.json())
 app.use(morgan(':method :url :status :body'))
 
+app.use('/api/blogs', quotesRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 
