@@ -16,8 +16,6 @@ quotesRouter.post('/', userExtractor, async (request, response) => {
   const quote = new Quote({
     title: body.title,
     author: body.author,
-    url: body.url,
-    // likes: body.likes,
     user: user.id,
   })
 
@@ -29,17 +27,6 @@ quotesRouter.post('/', userExtractor, async (request, response) => {
     username: user.username
   })
 })
-
-// quotesRouter.put('/:id', async (request, response) => {
-//   const update = { likes: request.body.likes }
-//   const updatedQuote = await Quote.findByIdAndUpdate(
-//                         request.params.id,
-//                         update,
-//                         { new: true, runValidators: true, context: 'query'}
-//                       )
-
-//   response.status(200).json(updatedQuote)
-// })
 
 quotesRouter.delete('/:id', userExtractor, async (request, response) => {
   const parameterId = request.params.id

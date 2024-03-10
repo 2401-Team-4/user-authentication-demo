@@ -36,7 +36,7 @@ app.use(cors())
 app.use(express.json())
 app.use(morgan(':method :url :status :body'))
 
-app.use('/api/blogs', quotesRouter)
+app.use('/api/quotes', quotesRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 
