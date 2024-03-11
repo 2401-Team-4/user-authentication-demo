@@ -30,5 +30,5 @@ This is how users are authenticated, and how persisting sessions are created via
 
 1. The frontend app reads the browser's local storage and if:
     - there is a token with the appropriate format
-    - the token **is not expired **(it lasts one hour, this is set when the token is created)
+    - the token **is not expired** (it lasts one hour, this is set when the token is created)
 2. It will load the content appropriate to the owner of that token. If not, the user will see the login form again.
