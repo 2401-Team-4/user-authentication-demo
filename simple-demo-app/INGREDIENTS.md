@@ -49,10 +49,3 @@ This is a list of all the components, libraries, and functions actively involved
     - `user.js`
 
         - `User` (MongoDB Schema)
-
-- `utils/`
-
-    - `middleware.js`
-
-        - `tokenExtractor()`
-        - `userExtractor()`

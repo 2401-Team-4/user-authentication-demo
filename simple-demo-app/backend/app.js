@@ -27,7 +27,6 @@ morgan.token('body', req => {
   return JSON.stringify(req.body)
 })
 
-app.use(middleware.tokenExtractor)
 app.use(cors())
 // app.use(express.static('dist'))
 app.use(express.json())
