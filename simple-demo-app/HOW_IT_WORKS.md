@@ -1,6 +1,6 @@
 # 👥 User Authentication ✅👌: How it works
 
-![Token-based authentication](assets-docs/2024-03-12-10-48-30.png)
+![Token-based authentication](../assets-docs/2024-03-12-10-48-30.png)
 
 ## Adding users
 
@@ -19,7 +19,7 @@ A user is manually added to the MongoDB, via a `POST` request to the backend ser
 4. The backend [login router](./backend/controllers/login.js) receives the request, validating the credentials if:
     - the user with that username exists in the database
     - **the hashed version of the password received is equal to the hashed version of the password stored in the database** (compared cryptographically by `bcrypt`).
-5. If the credentials are validated, the login router creates a cryptographically signed token with the JSON Web Token format (via the `jwt` library) and sends as a response:
+5. If the credentials are validated, the login router creates a cryptographically signed token with the JSON Web Token format (via the `jwt` library) and sends as a response in an object:
     - the crypto-signed token
     - some user data (`name`, `username` and the database `id`).
 6. When the frontend receives that response: 
