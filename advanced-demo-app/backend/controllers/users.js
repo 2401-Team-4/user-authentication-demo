@@ -6,7 +6,7 @@ const MIN_PASSWORD_LENGTH = 3
 const SALT_ROUNDS = 10
 
 usersRouter.get('/', async (request, response) => {
-  const users = await User.find({}).populate('quotes', {title: 1, author: 1, likes: 1})
+  const users = await User.find({}).populate('quotes', {title: 1, author: 1})
   // the argument given to the populate method defines that the ids referencing
   // quote objects in the quotes field of the user document will be replaced
   // by the referenced quote document (pseudo join queries)
