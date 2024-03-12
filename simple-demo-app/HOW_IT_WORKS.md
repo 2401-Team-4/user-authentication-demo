@@ -1,5 +1,7 @@
 # 👥 User Authentication ✅👌: How it works
 
+![Token-based authentication](assets-docs/2024-03-12-10-48-30.png)
+
 ## Adding users
 
 A user is manually added to the MongoDB, via a `POST` request to the backend server (you did this step following the 'How to Run' section in [`README.md`](../README.md))
